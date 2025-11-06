@@ -1,0 +1,13 @@
+#include "ServoControl.h"
+
+Adafruit_PWMServoDriver pca1 = Adafruit_PWMServoDriver(0x40);
+
+int angleToPulse(float angle) {
+  return map((int)angle, 0, 180, SERVO_MIN, SERVO_MAX);
+}
+
+void setServo(int ch, float angle) {
+  if (angle < 0) angle = 0;
+  if (angle > 180) angle = 180;
+  pca1.setPWM(ch, 0, angleToPulse(angle));
+}
