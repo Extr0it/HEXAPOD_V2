@@ -1,0 +1,29 @@
+#include "Leg.h"
+#include "IK.h"
+#include "ServoControl.h"
+
+Leg leg1 = {0, 1, 2,    0, 0, 0, -140};
+Leg leg2 = {8, 9, 10,   0, 0, 0, -140};
+Leg leg3 = {12, 13, 14, 0, 0, 0, -140};
+
+void gotoLeg(Leg &leg, float x, float y, float z) {
+  float t1, t2, t3;
+  IK(x, y, z, &t1, &t2, &t3);
+
+  setServo(leg.coxa,  105 + (t1 - 90) + leg.offCoxa);
+  setServo(leg.femur, 90 + t2       + leg.offFemur);
+  setServo(leg.tibia, 50 + t3       + leg.offTibia);
+}
+
+void legPath(Leg &leg, float phase) {
+  float xStart = 100, xEnd = 130;
+  float stepHeight = 40, zMax = 60;
+
+  float t = phase;
+  float x = xStart + (xEnd - xStart) * t;
+  float z = zMax * (2*t - 1);
+  float lift = stepHeight * sin(t * M_PI);
+  float y = leg.yGround + lift;
+
+  gotoLeg(leg, x, y, z);
+}
