@@ -1,0 +1,19 @@
+#include <math.h>
+#include "IK.h"
+#include "Config.h"
+
+void IK(float x, float y, float z, float* t1, float* t2, float* t3) {
+  float pi = 3.14159;
+
+  *t1 = atan2(z, x) * 180/pi + 90;
+
+  float rx = sqrt(x*x + z*z) - L1;
+  float fi2 = atan2(y, rx);
+  float r   = sqrt(y*y + rx*rx);
+
+  float fi1 = -acos((L2*L2 + r*r - L3*L3) / (2*L2*r));
+  *t2 = (fi2 - fi1) * 180/pi;
+
+  float fi3 = acos((-L2*L2 - L3*L3 + r*r) / (-2*L2*L3));
+  *t3 = (pi - fi3) * 180/pi;
+}
