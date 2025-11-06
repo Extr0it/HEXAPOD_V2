@@ -4,7 +4,7 @@
 Hexapodul, varianta structurata pe fisiere, pentru lizibilitate, si organizare.
 Este inca in stadiul de lucru, deoarece nu e singurul proiect de care ma ocup. 
 
-Aici se afla toate partile lui, de la CAD la COD. 
+Aici se afla toate partile lui, de la CAD (fisierele STEP) la COD. 
 
 LINKURI DE FUNCTIONARE PE YOUTUBE : 
 
